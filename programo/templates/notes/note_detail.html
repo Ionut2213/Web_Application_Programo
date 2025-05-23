@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{note.title}}</title>
+</head>
+<body>
+    <h1>{{note.title}}</h1>
+    <p>{{note.content}}</p>
+    <p>Importance: {{note.get_importance_display}}</p>
+    <p>Category: {{note.category}}</p>
+    <p>Tags: {% for tag in note.tags.all%} {{tag.name}} {% if not forloop.last%}, {%endif%}{%endfor%}</p>
+    <p>Attachments: {%if note.attachments%} <a href="{{note.attachments.url}}">Download</a>{%endif%}</p>
+    <p>Created at: {{note.created_at}}</p>
+    <p>Updated at: {{note.updated_at}}</p>
+    <a href = "{url 'note_edit' note.pk}">Edit</a>
+    <a href = "{url 'note_list'}">Back to list</a>
+
+</body>
+
+
+</html>

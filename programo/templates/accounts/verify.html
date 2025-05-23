@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="widht = device-width, initial-scale=1.0">
+        <title>Verify</title>
+        <style>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+
+.title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+
+
+
+.title h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+
+.message {
+    background-color: #e9f5ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+
+}
+
+
+.message p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+input::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+
+
+.password-strenght {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #ffff;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+}
+
+
+.password-strenght.weak {
+    background-color: #ff4d4d;
+}
+
+.password-strenght.modarate {
+    background-color: #ffa500;
+}
+
+.password-strenght.strong {
+    background-color: #28a745;
+}
+
+
+.password-match {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #ff4d4d;
+    text-align: center;
+    display: none;
+}
+
+.password-match.match {
+    color: #28a745;
+    display: block;
+}
+
+
+.password-match.nomatch {
+    color: #ff4d4d;
+    display: block;
+}
+
+
+
+
+
+
+        </style>
+    </head>
+
+
+
+    <body>
+        <div class="container">
+            <h2 class="title">Verify</h2>
+            <div class="message">
+                <p>Introdu codul de verificare primit pe adresa de email pe care ai folosit o pentru a ti crea contul</p>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class = "form-group">
+                    <label for = "id_verification_code">Verification Code:</label>
+                    {{form.verification_code}}
+                </div>
+                <div class = "form-group">
+                    <label for = "id_password1">Password:</label>
+                    {{form.password1}}
+                    <div id = "password-strenght" class="password-strenght"></div>
+                </div>
+                <div class = "form-group">
+                    <label for = "id_password2">Confirm Password:</label>
+                    {{form.password2}}
+                    <div id = "password-match" class="password-match"></div>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                const password1Input = document.querySelector('input[name="password1"]');
+                const password2Input = document.querySelector('input[name="password2"]');
+                const strenghtDisplay = document.getElementById('password-strenght');
+                const matchDisplay = document.getElementById('password-match');
+
+                password1Input.addEventListener('input', function (){
+                    const password = password1Input.value;
+                    let strength = getPasswordStrength(password);
+
+
+                    strenghtDisplay.textContent = strength.message;
+                    strenghtDisplay.className = 'password-strength' + strength.className;
+
+                    checkPasswordMatch();
+                });
+
+                password2Input.addEventListener('input', function () {
+                    checkPasswordMatch();
+                });
+
+                function getPasswordStrength(password){
+                    let strength = {message: 'Weak', className: 'weak'};
+
+                    if (password.length > 8) {
+                        strength.message = 'Moderate';
+                        strength.className = 'moderate';
+                    }
+
+                    if (password.length > 12 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password) && /[!@#$%ˆ&*]/.test(password)) {
+                        strength.message = 'Strong';
+                        strength.className = 'strong';
+                    }
+                    return strength
+                }
+
+                function checkPasswordMatch() {
+                    const password1 = password1Input.value;
+                    const password2 = password2Input.value;
+
+                    if (password1 == password2) {
+                        if (password1 == password2) {
+                            matchDisplay.textContent = 'Password match';
+                            matchDisplay.className = 'password-match match';
+                        } else{
+                            matchDisplay.textContent = 'Password do not match';
+                            matchDisplay.className = 'password-match nomatch';
+                        }
+                    } else {
+                        matchDisplay.textContent = '';
+                        matchDisplay.className = 'password-match'
+                    }
+                }
+            });
+
+        </script>
+    </body>
+</html>
