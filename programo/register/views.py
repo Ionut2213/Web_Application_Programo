@@ -54,7 +54,8 @@ def verify(request, pk):
         data['password2'] = request.POST.get('password2')
         data['verification_code'] = request.POST.get('verification_code')
 
-        registration_request = get_object_or_404(RegisterVerificationRequestModel pk=pk)
+        registration_request = get_object_or_404(RegisterVerificationRequestModel, pk=pk)
+
         validation_code_from_data_base = registration_request.verification_code
         data['username'] = registration_request.first_name[0] + registration_request.last_name + str(random.randint(1, 9999))
         data['first_name'] = registration_request.first_name
@@ -83,7 +84,7 @@ def verify(request, pk):
 
 
 def user_login(request):
-    if request.metod == 'POST':
+    if request.method == 'POST':
         form = AuthenticationForm(request, data= request.POST)
         if form.is_valid():
 

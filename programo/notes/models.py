@@ -39,9 +39,13 @@ class Note(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     importance = models.CharField(max_length=10, choices=IMPORTANCE_CHOICE, default='low')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = models.ManyToManyField(upload_to = 'attachments/', null=True, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+
+    attachments = models.FileField(upload_to='attachments/', null=True, blank=True)
+
     is_archived = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     objects = NoteManager()
     all_objects = models.Manager()

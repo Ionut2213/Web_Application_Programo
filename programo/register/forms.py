@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import RegisteredVerificationRequestModel
+from .models import RegisterVerificationRequestModel
 
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(required=False, widget= forms.HiddenInput())
@@ -27,7 +27,7 @@ class UserRegisterForm(UserCreationForm):
 
 class RegistrationRequestForm(forms.ModelForm):
     class Meta:
-        model = RegisteredVerificationRequestModel
+        model = RegisterVerificationRequestModel
         fields = ['first_name', 'last_name', 'email']
 
 
