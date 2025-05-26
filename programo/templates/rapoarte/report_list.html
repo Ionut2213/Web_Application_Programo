@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widht=device-widht, initial-scale=1.0">
+    <title>Lista Rapoarte</title>
+    <link rel="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Lista Rapoarte</h1>
+        <ul class="list-group">
+            {% for report in reports %}
+            <li class="list-group-item">
+                <a href="{% url 'report_detail' report.pk%}">{{report.title}}</a> - {{report.created_at}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
