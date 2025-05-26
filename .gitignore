@@ -1,2 +1,5 @@
 programo/programo/settings.py
 programo/static/images/pexels3.jpg
+programo/templates/users/email_verification.html
+programo/templates/users/login.html
+programo/templates/users/register.html
