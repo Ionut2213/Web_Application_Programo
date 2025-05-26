@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang = "en">
-{%load static%}
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width= device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "{%static 'css/style.css'%}">
+    <link rel = "stylesheet" href = "{% static 'css/style.css' %}">
     <title>Programo</title>
     <link rel = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel = "stylesheet">
 
@@ -13,16 +13,18 @@
             height: 100%;
             margin: 0;
         }
+
         body{
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-image: url("{%static 'images/pexels3.jpg'%}");
+            background-image: url("{% static 'images/pexels3.jpg'%}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
 
+        
         .background-container{
             flex: 1;
         }
