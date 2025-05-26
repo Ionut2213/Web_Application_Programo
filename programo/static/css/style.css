@@ -1,0 +1,38 @@
+.footer-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+
+.contact-container {
+    padding: 20px;
+}
+
+.contact-item {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.contact-item .icon img {
+    max-width: 40px;
+}
+
+.contact-item h1 {
+    color: #007bff;
+
+}
+
+
+.contact-item h2 {
+    color: #6c757d;
+}
+
+
+#footer {
+    background-color: blue;
+    color: black;
+    padding: 10px 0;
+    text-align: center;
+}
