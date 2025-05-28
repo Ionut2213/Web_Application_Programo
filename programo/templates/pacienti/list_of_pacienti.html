@@ -29,12 +29,12 @@
                         <tbody>
                             {%for pacient in all_pacients%}
                             <tr>
-                                <td>{{forloop.counter}}</td>
-                                <td>{{pacient.first_name}}</td>
-                                <td>{{pacient.last_name}}</td>
-                                <td>{{pacient.start_date}|date:"d/m/Y"}</td>
-                                <td>{{pacient.gender}}</td>
-                                <td>{{pacient.created_at|date:"d-m-Y H:i:s"}}</td>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ pacient.first_name }}</td>
+                                <td>{{ pacient.last_name }}</td>
+                                <td>{{ pacient.start_date|date:"d/m/Y" }}</td>
+                                <td>{{ pacient.gender }}</td>
+                                <td>{{ pacient.created_at|date:'d-m-Y' }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
