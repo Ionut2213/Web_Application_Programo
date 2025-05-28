@@ -5,3 +5,4 @@ programo/templates/users/login.html
 programo/templates/users/register.html
 programo/db.sqlite3
 programo/db.sqlite3
+programo/db.sqlite3

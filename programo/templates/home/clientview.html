@@ -2,73 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class = "navbar navbar-expand-lg bg-body-tertiary">
-    <div class = "container-fluid">
-        <a class = "navbar-brand" href="#">Programo</a>
-        <button class = "navbar-toggler" type="button" data-bs-toggle = "collapse" data-bs-target="#navbarSupportedContent"
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Programo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class = "collapse navbar-collapse" id = "navbarSupportedContent">
-            <ul class = "navbar-nav me-auto mb-2 mb-lg-0">
-                <li class = "nav-item">
-                    <a class = "nav-link active" aria-current="page" href="#">Home</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-                <li class = "nav-item dropdown">
-                    <a class = "nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+
+                <!-- Pacient -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Pacient
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class = "dropdown-item" href = "{%url 'create-pacient'%}">Creeaza pacient nou</a></li>
-                        <li><a class = "dropdown-item" href = "{%url 'list-pacients'%}">Lista Pacienti</a></li>
-                        <li><a class = "dropdown-item" href = "#">Istoric Pacienti</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create-pacient' %}">Creeaza pacient nou</a></li>
+                        <li><a class="dropdown-item" href="{% url 'list-pacients' %}">Lista Pacienti</a></li>
+                        <li><a class="dropdown-item" href="#">Istoric Pacienti</a></li>
                     </ul>
                 </li>
-                <li class = "nav-item dropdown">
-                    <a class = "nav-link dropdown-toggle" href="#" role="button" data-bs-target="dropdown"
-                        aria-expanded="false">
+
+                <!-- Notite -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Notite
                     </a>
-                    <ul class = "dropdown-item">
-                        <li><a class = "dropdown-item" href="{%url 'create-pacient'%}">Creeaza Pacient nou</a></li>
-                        <li><a class = "dropdown-item" href="{% url 'list-pacients'%}">Lista Pacienti</a></li>
-                        <li><a class = "dropdown-item" href="#">Istoric Pacienti</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'create-pacient' %}">Creeaza pacient nou</a></li>
+                        <li><a class="dropdown-item" href="{% url 'list-pacients' %}">Lista Pacienti</a></li>
+                        <li><a class="dropdown-item" href="#">Istoric Pacienti</a></li>
                     </ul>
                 </li>
-                <li class = "nav-item dropdown">
-                    <a class = "nav-link dropdown-toggle" href="#" role="button" data-bs-target="dropdown"
-                        aria-expanded="false">
+
+                <!-- Feedback -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Feedback
                     </a>
-                    <ul class = "dropdown-menu">
-                        <li><a class = "dropdown-item" href="{%url 'add-feedback'%}">Create a new feedback</a></li>
-                        <li><a class = "dropdown-item" href="{%url 'note_list'%}">Lista Notite</a></li>
-                        <li><a class = "dropdown-item" href="#">Istoric Notite</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'add-feedback' %}">Create a new feedback</a></li>
+                        <li><a class="dropdown-item" href="{% url 'note_list' %}">Lista Notite</a></li>
+                        <li><a class="dropdown-item" href="#">Istoric Notite</a></li>
                     </ul>
                 </li>
-                <li class = "nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-target="dropdown"
-                        aria-expanded="false">
+
+                <!-- Rapoarte -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Rapoarte
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{%url 'generate-report'%}">Genereaza Rapoarte</a></li>
-                        <li><a class ="dropdown-item" href="#">Lista Rapoarte</a></li>
+                        <li><a class="dropdown-item" href="{% url 'generate-report' %}">Genereaza Rapoarte</a></li>
+                        <li><a class="dropdown-item" href="#">Lista Rapoarte</a></li>
                     </ul>
                 </li>
             </ul>
-            {%if user.is_authenticated%}
-            <form method="post" action="{%url 'logout'%}">
+
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-outline-secondary">Logout, {{user.username}}</button>
+                <button type="submit" class="btn btn-outline-secondary">Logout, {{ user.username }}</button>
             </form>
-            {%endif%}
+            {% endif %}
         </div>
     </div>
 </nav>
@@ -78,6 +84,6 @@
     <p>Manage your clients and view statistics here.</p>
 </div>
 
-<script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
